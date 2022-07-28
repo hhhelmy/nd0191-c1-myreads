@@ -19,17 +19,18 @@ const App = () => {
   }, [])
 
   const changeBookShelf = (book, newShelf) =>{
-    
+
     const updateShelf = async () =>{
 
      BooksAPI.update(book, newShelf);
       
       if(book.shelf === undefined){
-  
+       
         setBooks(books.concat(book));
       }
-  
-  
+      
+      const newBooks =  books.filter((currentBook) => currentBook.id === book.id ? currentBook.shelf = newShelf:currentBook );
+      setBooks(newBooks);
     }
     updateShelf();
   }
