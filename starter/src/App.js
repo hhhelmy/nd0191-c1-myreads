@@ -7,20 +7,6 @@ import { Routes, Route} from "react-router-dom";
 
 const App = () => {
 
-  const changeBookShelf = (book, newShelf) =>{
-    
-    const updateShelf = async () =>{
-      
-      BooksAPI.update(book, newShelf);
-      
-      const newBooks =  books.filter((currentBook) => currentBook.id === book.id ? currentBook.shelf = newShelf:currentBook );
-    
-      setBooks(newBooks);
-     
-    }
-    updateShelf();
-  }
-
   const [books, setBooks] = useState([]);
   
   useEffect(()=>{
@@ -31,6 +17,24 @@ const App = () => {
 
     getBooks();
   }, [])
+
+  const changeBookShelf = (book, newShelf) =>{
+    
+    const updateShelf = async () =>{
+
+     BooksAPI.update(book, newShelf);
+      
+      if(book.shelf === undefined){
+  
+        setBooks(books.concat(book));
+      }
+  
+  
+    }
+    updateShelf();
+  }
+
+ 
 
   
   return (
