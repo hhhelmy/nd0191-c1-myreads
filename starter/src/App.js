@@ -36,7 +36,11 @@ const App = () => {
   }
 
  
-
+  const shelves = [
+    {id:"1", shelfName:"currentlyReading", shelfDisplayName:"Currently Reading"},
+    {id:"2", shelfName:"wantToRead", shelfDisplayName:"Want to Read"},
+    {id:"3", shelfName:"read", shelfDisplayName:"Read"},
+    {id:"4", shelfName:"none", shelfDisplayName:"None"}]
   
   return (
     <div className="app">
@@ -46,13 +50,13 @@ const App = () => {
             <Route 
               path="/" 
               element={
-                <ListBooks books={books} changeBookShelf={changeBookShelf} />
+                <ListBooks books={books} shelves={shelves} changeBookShelf={changeBookShelf} />
               } />
             
               <Route 
               path="/search" 
               element={
-                <BookSearch books={books} changeShelf={changeBookShelf} />
+                <BookSearch books={books} shelves={shelves} changeShelf={changeBookShelf} />
               } />
             </Routes>
           </div>

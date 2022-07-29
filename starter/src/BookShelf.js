@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 
 /* Pass props from Parent Component (App)  */
-const BookShelf = ({books, shelfTitle, changeShelf}) => {
+const BookShelf = ({books, shelves, shelfTitle, changeShelf}) => {
     return (
         <div className="bookshelf">
         <h2 className="bookshelf-title">{shelfTitle}</h2>
@@ -26,15 +26,15 @@ const BookShelf = ({books, shelfTitle, changeShelf}) => {
                   ></div>
                   <div className="book-shelf-changer">
                     <select key={book.id} value={book.shelf} onChange={(e) => changeShelf(book, e.target.value)}>
-                      <option value="none" disabled>
-                        Move to...
-                      </option>
-                      <option value="currentlyReading">
-                        Currently Reading
-                      </option>
-                      <option value="wantToRead">Want to Read</option>
-                      <option value="read">Read</option>
-                      <option value="none">None</option>
+
+                        {
+                        shelves.map((shelf) =>(
+                          <option value={shelf.shelfName}>
+                            {shelf.shelfDisplayName}
+                          </option>         
+                            ))
+                        }
+                      
                     </select>
                   </div>
                 </div>
@@ -55,6 +55,7 @@ const BookShelf = ({books, shelfTitle, changeShelf}) => {
 
 BookShelf.propTypes={
     books: PropTypes.array.isRequired,
+    shelves: PropTypes.array.isRequired,
     shelfTitle: PropTypes.string.isRequired,
     changeShelf: PropTypes.func.isRequired,
 }
