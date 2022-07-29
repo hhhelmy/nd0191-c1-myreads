@@ -2,6 +2,7 @@ import {Link} from "react-router-dom";
 import { useState } from "react";
 import * as BooksAPI from "./BooksAPI"
 import PropTypes from "prop-types";
+import Book from "./Book";
 
 const BookSearch = ({books, changeShelf}) => {
 
@@ -53,36 +54,7 @@ const BookSearch = ({books, changeShelf}) => {
                 showingBooks.map((book) =>(
 
                     <li key={book.id}>
-                    <div className="book">
-                        <div className="book-top">
-                        <div
-                            className="book-cover"
-                            style={{
-                            width: 128,
-                            height: 193,
-                            backgroundImage:
-                            `url(${book.imageLinks.smallThumbnail})`,
-                            }}
-                        ></div>
-                        <div className="book-shelf-changer">
-                            <select key={book.id} value={
-                                books.find(e => e.id === book.id) ? books.find(e => e.id === book.id).shelf:"none"
-                                } onChange={(e) => changeShelf(book, e.target.value)}>
-                                <option value="" disabled>
-                                    Move to...
-                                </option>
-                                <option value="currentlyReading">
-                                    Currently Reading
-                                </option>
-                                <option value="wantToRead">Want to Read</option>
-                                <option value="read">Read</option>
-                                <option value="none">None</option>
-                            </select>
-                        </div>
-                        </div>
-                        <div className="book-title">{book.title}</div>
-                        <div className="book-authors">{book.authors}</div>
-                    </div>
+                     <Book book={book} books={books} changeShelf={changeShelf}/>
                     </li>
                 ))
             ) 
